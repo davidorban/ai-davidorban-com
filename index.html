@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>David Orban · Working with AI</title>
+<meta name="description" content="How David Orban works alongside AI — a personal fleet of agents, a knowledge assistant named Dex you can email, and the tools behind it all.">
+<meta name="author" content="David Orban">
+<link rel="canonical" href="https://ai.davidorban.com/">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai.davidorban.com/">
+<meta property="og:title" content="David Orban · Working with AI">
+<meta property="og:description" content="A personal fleet of AI agents, a knowledge assistant named Dex you can email, and the tools behind it all.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="David Orban · Working with AI">
+<meta name="twitter:description" content="A personal fleet of AI agents, a knowledge assistant named Dex you can email, and the tools behind it all.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#0b1020;
+    --navy-2:#121a33;
+    --ink:#e8ecf7;
+    --muted:#9aa6c4;
+    --gold:#e9b949;
+    --blue:#5b8cff;
+    --line:rgba(255,255,255,.09);
+    --card:rgba(255,255,255,.035);
+    --maxw:1040px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(91,140,255,.18), transparent 60%),
+      radial-gradient(900px 500px at 0% 10%, rgba(233,185,73,.10), transparent 55%),
+      var(--navy);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  /* Nav */
+  header.nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(11,16,32,.6);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:600;letter-spacing:.2px}
+  .brand .dot{color:var(--gold)}
+  .nav a.cta{font-size:.9rem;padding:.5rem .9rem;border:1px solid var(--gold);
+    border-radius:999px;color:var(--gold);text-decoration:none;transition:.2s}
+  .nav a.cta:hover{background:var(--gold);color:#1a1400}
+
+  /* Hero */
+  .hero{padding:96px 0 64px}
+  .eyebrow{font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:20px}
+  .hero h1{font-size:clamp(2.4rem,6vw,4rem);line-height:1.08;margin:0 0 20px;font-weight:700;letter-spacing:-.5px}
+  .hero h1 .accent{background:linear-gradient(90deg,var(--gold),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--muted);max-width:640px;margin:0 0 32px}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 1.4rem;border-radius:12px;
+    text-decoration:none;font-weight:600;font-size:.98rem;transition:.2s;border:1px solid transparent}
+  .btn.primary{background:var(--gold);color:#1a1400}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(233,185,73,.28)}
+  .btn.ghost{border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--blue);color:#fff}
+
+  /* Section */
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  .sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--blue);letter-spacing:.1em;margin-bottom:12px}
+  h2{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:0 0 18px;font-weight:600;letter-spacing:-.3px}
+  .prose{max-width:720px;color:var(--muted);font-size:1.06rem}
+  .prose strong{color:var(--ink);font-weight:600}
+  .prose p{margin:0 0 18px}
+
+  /* Manifesto pull */
+  .pull{max-width:760px;font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.45;color:var(--ink);
+    font-weight:500;margin:8px 0 0;border-left:3px solid var(--gold);padding-left:22px}
+  .pull .em{color:var(--gold)}
+
+  /* Tools grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:36px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 24px;transition:.2s}
+  .card:hover{border-color:rgba(91,140,255,.5);transform:translateY(-3px);background:rgba(255,255,255,.05)}
+  .card .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);opacity:.9}
+  .card h3{margin:10px 0 8px;font-size:1.18rem;font-weight:600}
+  .card p{margin:0;color:var(--muted);font-size:.96rem}
+
+  /* Email Dex */
+  .dex{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+  .dex-card{background:linear-gradient(160deg,rgba(91,140,255,.14),rgba(233,185,73,.08));
+    border:1px solid var(--line);border-radius:20px;padding:30px}
+  .addr{font-family:'IBM Plex Mono',monospace;font-size:1.05rem;color:var(--gold);
+    background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 22px;word-break:break-all}
+  .addr button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:7px;
+    padding:5px 10px;font-size:.78rem;cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap}
+  .addr button:hover{border-color:var(--gold);color:var(--gold)}
+  ul.how{list-style:none;padding:0;margin:0;color:var(--muted);font-size:.98rem}
+  ul.how li{padding:8px 0 8px 28px;position:relative}
+  ul.how li::before{content:"→";position:absolute;left:0;color:var(--blue)}
+
+  /* Footer */
+  footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:18px}
+  .foot-links a{color:var(--muted);text-decoration:none;transition:.15s}
+  .foot-links a:hover{color:var(--gold)}
+  .small{font-size:.82rem;opacity:.7}
+
+  @media(max-width:720px){
+    .dex{grid-template-columns:1fr;gap:26px}
+    .hero{padding:64px 0 40px}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <span class="brand">David Orban<span class="dot">.</span><span class="mono" style="opacity:.6;font-size:.85rem">/ai</span></span>
+    <a class="cta" href="#email-dex">Email Dex</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="wrap hero">
+  <div class="eyebrow">Working with AI</div>
+  <h1>I don't just use AI.<br><span class="accent">I work alongside it.</span></h1>
+  <p class="lead">A personal fleet of autonomous agents, a knowledge assistant named <strong style="color:var(--ink)">Dex</strong> that you can email directly, and a stack of tools that turn one person into a small, tireless organization.</p>
+  <div class="btn-row">
+    <a class="btn primary" href="#email-dex">✉︎ Email Dex</a>
+    <a class="btn ghost" href="#tools">See the toolkit</a>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section id="approach">
+  <div class="wrap">
+    <div class="sec-eyebrow">// the approach</div>
+    <h2>Humans and AIs, side by side</h2>
+    <div class="prose">
+      <p>I run my work as a <strong>hybrid team</strong>. Some contributors are people. Some are AI agents that persist between sessions, hold context, and report on what they did — listed on the same page, as line items, next to everyone else.</p>
+      <p>The bet is simple: <strong>AI readiness is behavioral, not declarative.</strong> You don't become AI-native by saying so, or by filling in a questionnaire. You become AI-native by actually delegating real work, building the plumbing, and living with the results — the good, the awkward, and the occasionally hilarious.</p>
+    </div>
+    <p class="pull">The interesting skill of the next decade isn't prompting. It's <span class="em">the management of AIs</span> — deciding what to hand off, how to verify it, and where a human still has to own the call.</p>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="wrap">
+    <div class="sec-eyebrow">// the toolkit</div>
+    <h2>The tools I actually use</h2>
+    <div class="prose"><p>Not an exhaustive list, and it changes often. This is the working set — the tools earning their keep right now.</p></div>
+    <div class="grid">
+      <div class="card">
+        <span class="tag">Reasoning &amp; agents</span>
+        <h3>Claude &amp; Claude Code</h3>
+        <p>My primary thinking partner and agentic environment — the place where research, writing, and real code changes get done, with tools wired in.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Personal assistant</span>
+        <h3>Dex</h3>
+        <p>A personal knowledge and operations assistant that tracks projects, people, and commitments — and has its own inbox you can write to.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Autonomous fleet</span>
+        <h3>A fleet of agents</h3>
+        <p>Persistent agents running around the clock on their own tasks, each with its own identity and email, reporting daily like any team member.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Image &amp; video</span>
+        <h3>Higgsfield</h3>
+        <p>Generative image and video for keynotes, essays, and social — from a single reference to a fully narrated film.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Voice</span>
+        <h3>ElevenLabs</h3>
+        <p>Voice synthesis and cloned narration — turning scripts into audio in multiple languages without a studio.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Memory &amp; search</span>
+        <h3>Semantic search</h3>
+        <p>Local semantic search over years of notes, transcripts, and writing — recall by meaning, not just keywords.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Routing &amp; observability</span>
+        <h3>Cloudflare AI Gateway</h3>
+        <p>A single gateway in front of the fleet's models — routing, fallbacks, and per-agent cost telemetry.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Interoperability</span>
+        <h3>MCP</h3>
+        <p>The Model Context Protocol — how agents plug into calendars, mail, docs, and dozens of other tools through one open standard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL DEX -->
+<section id="email-dex">
+  <div class="wrap dex">
+    <div>
+      <div class="sec-eyebrow">// reach out</div>
+      <h2>Email Dex directly</h2>
+      <div class="prose" style="max-width:none">
+        <p><strong>Dex</strong> is my AI assistant, and it has its own mailbox. Write to it like you'd write to a capable chief of staff: an introduction, a question, an idea, a request.</p>
+        <p>Dex reads everything that arrives and drafts responses — but a reply only goes out once I've reviewed it. Human in the loop, always.</p>
+      </div>
+      <ul class="how">
+        <li>Introductions and genuine questions are welcome</li>
+        <li>Speaking &amp; advisory enquiries: give context and dates</li>
+        <li>No spam, scraping, or automated blasts</li>
+      </ul>
+    </div>
+    <div class="dex-card">
+      <div class="mono" style="font-size:.8rem;color:var(--muted)">write to</div>
+      <div class="addr">
+        <span id="dex-addr">dex@ai.davidorban.com</span>
+        <button onclick="copyAddr()" id="copybtn">Copy</button>
+      </div>
+      <a class="btn primary" style="width:100%;justify-content:center"
+         href="mailto:dex@ai.davidorban.com?subject=Hello%20Dex&body=Hi%20Dex%2C%0A%0A">
+        ✉︎ Open email to Dex
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="https://davidorban.com">davidorban.com</a>
+      <a href="https://www.linkedin.com/in/davidorban/">LinkedIn</a>
+      <a href="https://x.com/davidorban">X</a>
+      <a href="mailto:dex@ai.davidorban.com">Email Dex</a>
+    </div>
+    <div>© <span id="yr"></span> David Orban — built and maintained with AI.</div>
+    <div class="small" style="margin-top:8px">ai.davidorban.com · a corner of the site run by, and about, the machines.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  function copyAddr(){
+    navigator.clipboard.writeText('dex@ai.davidorban.com').then(function(){
+      var b=document.getElementById('copybtn');
+      var t=b.textContent; b.textContent='Copied ✓';
+      setTimeout(function(){b.textContent=t;},1600);
+    });
+  }
+</script>
+</body>
+</html>
