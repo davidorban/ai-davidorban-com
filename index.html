@@ -111,15 +111,31 @@
   ul.how li::before{content:"→";position:absolute;left:0;color:var(--blue)}
 
   /* Footer */
-  footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
-  .foot-links{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:18px}
-  .foot-links a{color:var(--muted);text-decoration:none;transition:.15s}
-  .foot-links a:hover{color:var(--gold)}
+  footer{padding:64px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1.5fr 1fr;gap:36px 28px}
+  .foot-col{display:flex;flex-direction:column;gap:9px}
+  .foot-col a{color:var(--muted);text-decoration:none;transition:.15s;font-size:.9rem}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-h{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+  .foot-brand{font-weight:600;font-size:1.15rem;color:var(--ink)}
+  .foot-brand .dot{color:var(--gold)}
+  .foot-tag{margin:2px 0 4px;color:var(--muted);font-size:.9rem;max-width:240px;line-height:1.5}
+  .foot-col a.ext::after{content:"↗";opacity:.5;font-size:.8em;margin-left:5px}
+  .foot-cta{display:inline-flex;align-items:center;gap:.5rem;align-self:flex-start;margin-top:6px;
+    padding:.6rem 1rem;border-radius:10px;background:var(--gold);color:#1a1400;font-weight:600;
+    font-size:.9rem;text-decoration:none;transition:.2s}
+  .foot-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(233,185,73,.24)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+    margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
   .small{font-size:.82rem;opacity:.7}
+  @media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.foot-grid{grid-template-columns:1fr}}
 
   /* Nav links */
-  .nav-links{display:flex;gap:26px;margin-left:auto;margin-right:26px;font-size:.9rem}
-  .nav-links a{color:var(--muted);text-decoration:none;transition:.15s}
+  .brand{text-decoration:none;color:var(--ink)}
+  .nav-links{display:flex;gap:22px;margin-left:auto;margin-right:24px;font-size:.9rem}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:.15s;white-space:nowrap}
   .nav-links a:hover{color:var(--gold)}
 
   /* Video band */
@@ -176,11 +192,14 @@
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <span class="brand">David Orban<span class="dot">.</span><span class="mono" style="opacity:.6;font-size:.85rem">/ai</span></span>
+    <a class="brand" href="https://davidorban.com/">David Orban<span class="dot">.</span><span class="mono" style="opacity:.6;font-size:.85rem">/ai</span></a>
     <nav class="nav-links">
-      <a href="#architecture">Architecture</a>
-      <a href="#discord">Discord</a>
-      <a href="#tools">Toolkit</a>
+      <a href="https://davidorban.com/">Home</a>
+      <a href="https://davidorban.com/about/">About</a>
+      <a href="https://davidorban.com/blog/">Blog</a>
+      <a href="https://davidorban.com/podcast/">Podcasts</a>
+      <a href="https://davidorban.com/speaking/">Speaking</a>
+      <a href="https://davidorban.com/contact/">Contact</a>
     </nav>
     <a class="cta" href="#email-dex">Email Dex</a>
   </div>
@@ -363,14 +382,45 @@
 
 <footer>
   <div class="wrap">
-    <div class="foot-links">
-      <a href="https://davidorban.com">davidorban.com</a>
-      <a href="https://www.linkedin.com/in/davidorban/">LinkedIn</a>
-      <a href="https://x.com/davidorban">X</a>
-      <a href="mailto:dex@ai.davidorban.com">Email Dex</a>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">David Orban<span class="dot">.</span></div>
+        <p class="foot-tag">Searching for the question — working alongside AI.</p>
+        <a class="foot-cta" href="#email-dex">✉︎ Email Dex</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">David Orban</div>
+        <a href="https://davidorban.com/">Home</a>
+        <a href="https://davidorban.com/about/">About</a>
+        <a href="https://davidorban.com/blog/">Blog</a>
+        <a href="https://davidorban.com/podcast/">Podcasts</a>
+        <a href="https://davidorban.com/the-context/">The Context</a>
+        <a href="https://davidorban.com/speaking/">Speaking</a>
+        <a href="https://davidorban.com/publications/">Publications</a>
+        <a href="https://davidorban.com/contact/">Contact</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">The network</div>
+        <a class="ext" href="https://aiparadox.davidorban.com/">The AI Paradox Report</a>
+        <a class="ext" href="https://jolting.davidorban.com/">Jolting Technologies Hypothesis</a>
+        <a class="ext" href="https://metamaterials.davidorban.com/">Civilizational Metamaterials</a>
+        <a class="ext" href="https://pedia.davidorban.com/">Wikipedia vs Grokipedia</a>
+        <a class="ext" href="https://somethingnew.davidorban.com/">Something New: AIs and Us</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">Elsewhere</div>
+        <a href="https://x.com/davidorban">X</a>
+        <a href="https://www.linkedin.com/in/davidorban/">LinkedIn</a>
+        <a href="https://www.youtube.com/user/davidorban">YouTube</a>
+        <a href="https://www.instagram.com/davidorban">Instagram</a>
+        <a href="https://www.facebook.com/searchingforthequestion">Facebook</a>
+        <a href="https://www.patreon.com/davidorban">Patreon</a>
+      </div>
     </div>
-    <div>© <span id="yr"></span> David Orban — built and maintained with AI.</div>
-    <div class="small" style="margin-top:8px">ai.davidorban.com · a corner of the site run by, and about, the machines.</div>
+    <div class="foot-bottom">
+      <div>© <span id="yr"></span> David Orban — built and maintained with AI.</div>
+      <div class="small">ai.davidorban.com · a corner of the site run by, and about, the machines.</div>
+    </div>
   </div>
 </footer>
 
