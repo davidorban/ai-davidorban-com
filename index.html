@@ -117,9 +117,58 @@
   .foot-links a:hover{color:var(--gold)}
   .small{font-size:.82rem;opacity:.7}
 
+  /* Nav links */
+  .nav-links{display:flex;gap:26px;margin-left:auto;margin-right:26px;font-size:.9rem}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:.15s}
+  .nav-links a:hover{color:var(--gold)}
+
+  /* Video band */
+  .motion{border-top:1px solid var(--line);padding:0}
+  .motion-inner{position:relative;max-width:1200px;margin:0 auto}
+  .motion video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+  .motion .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 24px 22px;
+    background:linear-gradient(to top,rgba(11,16,32,.92),rgba(11,16,32,.55) 55%,transparent);
+    display:flex;flex-direction:column;gap:6px}
+  .motion .cap .k{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--blue);letter-spacing:.1em}
+  .motion .cap .t{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--ink);font-weight:500;max-width:720px}
+
+  /* Architecture layers */
+  .layers{display:flex;flex-direction:column;gap:12px;margin-top:36px}
+  .layer{display:grid;grid-template-columns:210px 1fr;gap:20px;align-items:start;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;transition:.2s}
+  .layer:hover{border-color:rgba(91,140,255,.45)}
+  .layer .lname{display:flex;flex-direction:column;gap:4px}
+  .layer .lname b{font-size:1.05rem;font-weight:600}
+  .layer .lname .tools{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--gold);opacity:.85;line-height:1.5}
+  .layer p{margin:0;color:var(--muted);font-size:.97rem}
+  .gate{margin-top:16px;border-left:3px solid var(--gold);padding:12px 0 12px 20px;color:var(--ink);font-weight:500;font-size:1.02rem}
+
+  /* Discord / nervous system */
+  .standup{margin-top:32px;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:16px;
+    padding:22px 22px 12px;font-family:'IBM Plex Mono',monospace;font-size:.9rem}
+  .standup .row{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line)}
+  .standup .row:last-child{border-bottom:none}
+  .standup .who{width:130px;flex:none;color:var(--ink);font-weight:500}
+  .standup .who.ai{color:var(--blue)}
+  .standup .who.human{color:var(--gold)}
+  .standup .msg{color:var(--muted)}
+  .standup .badge{font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);
+    border-radius:5px;padding:1px 6px;margin-left:8px;opacity:.75}
+
+  /* Field notes */
+  .notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:32px}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .note .n{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--blue);letter-spacing:.08em;margin-bottom:10px}
+  .note p{margin:0;color:var(--muted);font-size:.95rem}
+  .note p strong{color:var(--ink);font-weight:600}
+
   @media(max-width:720px){
     .dex{grid-template-columns:1fr;gap:26px}
     .hero{padding:64px 0 40px}
+    .nav-links{display:none}
+    .layer{grid-template-columns:1fr;gap:8px}
+    .standup .row{flex-direction:column;gap:2px}
+    .standup .who{width:auto}
   }
 </style>
 </head>
@@ -128,6 +177,11 @@
 <header class="nav">
   <div class="wrap nav-inner">
     <span class="brand">David Orban<span class="dot">.</span><span class="mono" style="opacity:.6;font-size:.85rem">/ai</span></span>
+    <nav class="nav-links">
+      <a href="#architecture">Architecture</a>
+      <a href="#discord">Discord</a>
+      <a href="#tools">Toolkit</a>
+    </nav>
     <a class="cta" href="#email-dex">Email Dex</a>
   </div>
 </header>
@@ -156,28 +210,103 @@
   </div>
 </section>
 
+<!-- SYSTEM IN MOTION (video) -->
+<section class="motion" aria-label="The system in motion">
+  <div class="motion-inner">
+    <video autoplay muted loop playsinline preload="metadata"
+           poster="assets/system-in-motion-poster.jpg">
+      <source src="assets/system-in-motion.mp4" type="video/mp4">
+    </video>
+    <div class="cap">
+      <span class="k">// the system in motion</span>
+      <span class="t">Information and work flowing through a living system that keeps running whether or not I'm awake.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="wrap">
+    <div class="sec-eyebrow">// how it fits together</div>
+    <h2>The shape of the system</h2>
+    <div class="prose"><p>Not a product, not a diagram to impress a boardroom — the actual working layers, described at the altitude that's useful. The coordinates stay private; the shape doesn't have to.</p></div>
+    <div class="layers">
+      <div class="layer">
+        <div class="lname"><b>The fleet</b><span class="tools">persistent agents</span></div>
+        <p>A set of autonomous agents that run around the clock, each with its own identity, mailbox, and standing tasks. They persist between sessions and hold their own context.</p>
+      </div>
+      <div class="layer">
+        <div class="lname"><b>The gateway</b><span class="tools">Cloudflare AI Gateway</span></div>
+        <p>A single gateway sits in front of the models the fleet uses — handling routing, fallbacks, and per-agent cost telemetry, so every agent's spend shows up as a line item.</p>
+      </div>
+      <div class="layer">
+        <div class="lname"><b>The knowledge layer</b><span class="tools">Dex · semantic search</span></div>
+        <p>Dex is the operations-and-memory brain: projects, people, commitments, and years of notes and transcripts, recalled by meaning rather than keyword. It also has the inbox you can write to.</p>
+      </div>
+      <div class="layer">
+        <div class="lname"><b>The connective tissue</b><span class="tools">MCP</span></div>
+        <p>The Model Context Protocol wires agents into calendars, mail, documents, and dozens of other tools through one open standard — so capability is a matter of plugging in, not rebuilding.</p>
+      </div>
+      <div class="layer">
+        <div class="lname"><b>The reasoning core</b><span class="tools">Claude · Claude Code</span></div>
+        <p>Where research, writing, and real code changes actually happen — the agentic environment the rest of the system is built and maintained from.</p>
+      </div>
+    </div>
+    <p class="gate">Nothing irreversible leaves the building without me. The last layer is always a human in the loop.</p>
+  </div>
+</section>
+
+<!-- DISCORD -->
+<section id="discord">
+  <div class="wrap">
+    <div class="sec-eyebrow">// where the agents talk</div>
+    <h2>Discord is the nervous system</h2>
+    <div class="prose" style="max-width:720px">
+      <p>The agents don't work in isolation. They share a Discord bus — posting daily standups, coordinating hand-offs, and flagging what needs a human. It's the same move as any distributed team, except some of the team never sleeps.</p>
+      <p>The point of the whole exercise: <strong>humans and AIs on the same standup, as line items, side by side.</strong></p>
+    </div>
+    <div class="standup" aria-label="Illustrative daily standup">
+      <div class="row"><span class="who human">David</span><span class="msg">Priorities for the day, approvals, direction.</span></div>
+      <div class="row"><span class="who ai">Agent · fleet</span><span class="msg">Overnight tasks done, cost report posted.<span class="badge">daily</span></span></div>
+      <div class="row"><span class="who ai">Agent · ops</span><span class="msg">Drafted three replies — waiting on review.<span class="badge">gated</span></span></div>
+      <div class="row"><span class="who ai">Agent · research</span><span class="msg">Sources gathered, summary in the shared log.<span class="badge">done</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FIELD NOTES -->
+<section id="field-notes">
+  <div class="wrap">
+    <div class="sec-eyebrow">// field notes</div>
+    <h2>A few things people find surprising</h2>
+    <div class="notes">
+      <div class="note">
+        <div class="n">01</div>
+        <p>Every agent has its <strong>own identity and mailbox</strong> — they send and receive email like any colleague, not like a script.</p>
+      </div>
+      <div class="note">
+        <div class="n">02</div>
+        <p>They <strong>report daily</strong>. Standups, cost lines, and what got done all land in one place, humans and machines together.</p>
+      </div>
+      <div class="note">
+        <div class="n">03</div>
+        <p>The interesting skill isn't prompting — it's <strong>deciding what to hand off</strong> and how to verify it came back right.</p>
+      </div>
+      <div class="note">
+        <div class="n">04</div>
+        <p>This site is <strong>built and maintained by the fleet</strong> it describes. Turtles, some of the way down.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TOOLS -->
 <section id="tools">
   <div class="wrap">
     <div class="sec-eyebrow">// the toolkit</div>
-    <h2>The tools I actually use</h2>
-    <div class="prose"><p>Not an exhaustive list, and it changes often. This is the working set — the tools earning their keep right now.</p></div>
+    <h2>Specialized tools on top</h2>
+    <div class="prose"><p>The architecture above is the frame. These are the specialized tools that ride on it — for making things, hearing things, and capturing the world. Not exhaustive, and it changes often.</p></div>
     <div class="grid">
-      <div class="card">
-        <span class="tag">Reasoning &amp; agents</span>
-        <h3>Claude &amp; Claude Code</h3>
-        <p>My primary thinking partner and agentic environment — the place where research, writing, and real code changes get done, with tools wired in.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Personal assistant</span>
-        <h3>Dex</h3>
-        <p>A personal knowledge and operations assistant that tracks projects, people, and commitments — and has its own inbox you can write to.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Autonomous fleet</span>
-        <h3>A fleet of agents</h3>
-        <p>Persistent agents running around the clock on their own tasks, each with its own identity and email, reporting daily like any team member.</p>
-      </div>
       <div class="card">
         <span class="tag">Image &amp; video</span>
         <h3>Higgsfield</h3>
@@ -189,19 +318,14 @@
         <p>Voice synthesis and cloned narration — turning scripts into audio in multiple languages without a studio.</p>
       </div>
       <div class="card">
-        <span class="tag">Memory &amp; search</span>
-        <h3>Semantic search</h3>
-        <p>Local semantic search over years of notes, transcripts, and writing — recall by meaning, not just keywords.</p>
+        <span class="tag">Programmatic video</span>
+        <h3>Editframe</h3>
+        <p>Video assembled in code — captions, transitions, and narration composed into finished films from a script, repeatably.</p>
       </div>
       <div class="card">
-        <span class="tag">Routing &amp; observability</span>
-        <h3>Cloudflare AI Gateway</h3>
-        <p>A single gateway in front of the fleet's models — routing, fallbacks, and per-agent cost telemetry.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Interoperability</span>
-        <h3>MCP</h3>
-        <p>The Model Context Protocol — how agents plug into calendars, mail, docs, and dozens of other tools through one open standard.</p>
+        <span class="tag">Ambient capture</span>
+        <h3>Bee</h3>
+        <p>A wearable that captures the day's conversations, so context and commitments flow into the system without me typing them up.</p>
       </div>
     </div>
   </div>
